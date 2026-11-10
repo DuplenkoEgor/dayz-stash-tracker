@@ -22,6 +22,9 @@ def main():
         elif unswer == "5":
             func.search_by_city(current_file)
 
+        elif unswer == "6":
+            func.del_stash(current_file)
+
         elif unswer == "0":
             break
 
