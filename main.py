@@ -26,6 +26,9 @@ def main():
         elif unswer == "6":
             func.del_stash(current_file)
 
+        elif unswer == "7":
+            func.edit_stash(current_file)
+
         elif unswer == "0":
             break
 

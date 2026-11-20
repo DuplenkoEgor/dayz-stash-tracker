@@ -43,9 +43,8 @@ def open_file():
     if file_name:
         print("done! File opened successful!")
         return name
-    else:
-        raise Exception("error: File not created!")
-
+    print("File not finded!")
+    return None
 
 def add_new_stash(current_file):
     while True:
@@ -132,7 +131,6 @@ def _save_stash(current_file, number, city, x, y, content_help_hint):
         file.seek(0, 2)
         file.write(f"{number} {city} {x} {y} ||| {content_help_hint}\n")
 
-
 def search_by_city(current_file):
     search_city = input("Enter city: ")
     filename = f"{current_file}.txt"
@@ -144,11 +142,46 @@ def search_by_city(current_file):
             if clear_line[1] == search_city:
                 print(deformator(line))
 
+def edit_stash(current_file):
+    show_all_stashes(current_file)
+    filename = f"{current_file}.txt"
+    id_for_edit = input("Enter edit id: ")
+
+    while True:
+        city = _get_stash_city()
+        if city is not None:
+            break
+        print("Wrong city! Try again! ")
+
+    while True:
+        coords = _get_stash_coords()
+        if coords is not None:
+            break
+        print("Wrong coords! Try again! ")
+    x,y = coords
+
+    while True:
+        content_help_hint = _get_stash_contents()
+        if content_help_hint is not None:
+            break
+        print("Wrong content! Try again! ")
+
+    with open(filename, "r") as file:
+        lines = file.readlines()
+
+    with open(filename, "w") as file:
+        for line in lines:
+            data = line.split()
+            if data[0] == id_for_edit:
+                file.write(f"{id_for_edit} {city} {x} {y} ||| {content_help_hint}\n")
+            else:
+                file.write(line)
+
 
 def del_stash(current_file):
 
     show_all_stashes(current_file)
-    id_for_del = input("Enter del id:")
+    id_for_del = input("Enter del id: ")
     filename = f"{current_file}.txt"
 
     with open(filename, "r") as file:
@@ -177,5 +210,5 @@ def print_help():
     print("4            - show all stashes")
     print("5            - search by City")
     print("6            - del stash")
-    # print("7            - edit")
+    print("7            - edit")
     print("0            - stop programm")
