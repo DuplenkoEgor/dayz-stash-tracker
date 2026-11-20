@@ -2,8 +2,9 @@ import functions as func
 
 
 def main():
-    br = True
-    while br:
+    current_file = func.open_file()
+    while True:
+        
         func.print_help()
         unswer = input("Enter commands: ")
 
