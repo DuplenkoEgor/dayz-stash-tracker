@@ -38,24 +38,4 @@ def search_by_city(stashes, city):
     for block in stashes:
         if block["city"] == city:
             result.append(block)
-    return result        
-
-if __name__ == "__main__":
-    stashes = st.load_stashes()
-    try:
-        add_stash(stashes, 1, "Berezino", 1.0, 2.0, "under tree", False)
-        add_stash(stashes, 2, "Berezino", 3.0, 4.0, "near wall", False)
-        add_stash(stashes, 3, "Elektro", 5.0, 6.0, "in barn", False)
-    except ValueError as error:
-        print("error:", error)
-
-    print(search_by_city(stashes, "Berezino"))   # два тайника
-    print(search_by_city(stashes, "Nowhere"))    # []
-
-    edit_stash(stashes, 3, "Elektro", 5.0, 6.0, "in barn", True)  # третий по порядку
-    del_stash(stashes, 2)
-    try:
-        del_stash(stashes, 99)
-    except ValueError as error:
-        print("error:", error)
-    print(stashes)
+    return result
